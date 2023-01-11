@@ -1,0 +1,7 @@
+body{
+    background-color: #161616;
+    font-family: Space Grotesk;
+}
+.brand{
+    filter: invert(77%) sepia(72%) saturate(316%) hue-rotate(34deg) brightness(108%) contrast(102%);
+}
