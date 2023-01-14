@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import firebaseConfig from '../../firebase__config'
-import { initializeFirestore, doc, setDoc, getDocs, collection, DocumentSnapshot } from "firebase/firestore"; //db
+import { initializeFirestore, getDocs, collection } from "firebase/firestore"; //db
 import { initializeApp } from "firebase/app";
 
 export default (props) => {

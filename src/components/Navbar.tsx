@@ -1,25 +1,28 @@
 import { Link } from 'react-router-dom'
 import logo from '../assets/brand.svg';
   
-const Navbar = (props) => {
+const Navbar = (props:any) => {
   
   return (
     <>
-      <nav className="z-50 fixed left-0 top-0 border border-transparent border-b-gray-700 w-full h-14 flex justify-between items-center px-5 backdrop-blur-3xl">
+      <nav className='fixed left-0 top-0 w-full h-14 border border-transparent border-b-gray-500 flex justify-between items-center px-14 font-normal bg-gray-800 text-sm text-gray-100 z-50'>
         <div className="flex items-center">
-          <img className="w-6 brand" src={logo} alt="Heelly"/>
-          <Link to='/' className="text-[10px] px-[0.4rem] py-[0.1rem] text-white border border-gray-200 rounded-md ml-2 font-normal select-none">BETA</Link>
+          <img onClick={() => window.location.href='/'} src={logo} alt="NuTrustX Logo PNG" className="brand w-8 mr-12 cursor-pointer"/>
+          <Link to='/products' className=' mr-12'>Products</Link>
+          <Link to='/challenges' className=' mr-12'>Become a Trader</Link>
         </div>
         <div className="flex items-center">
             {
               !props.user__ &&
-              <Link to='/login' className="duration-150 px-2.5 py-2 border text-sm rounded hover:text-white border-gray-200 hover:border-white mr-2.5">Login</Link>
+              <>
+                <Link to='/register'>Sign In</Link>
+                <Link to='/register' className='py-2 px-7 bg-green-500'>Be Trader</Link>
+              </>
             }
             {
               props.user__ &&
-              <button onClick={props.logout} className="duration-150 px-2.5 py-2 border text-sm rounded hover:text-white border-gray-200 hover:border-white mr-2.5">Logout</button>
+              <p>Account(Handle)</p>
             }
-            <Link to='/plans' className="px-2.5 py-2 bg-violet-500 text-white text-sm rounded hover:bg-violet-600 duration-150">Get Funded</Link>
         </div>
       </nav>
     </>

@@ -4,6 +4,7 @@ import axios from 'axios';
 import firebaseConfig from '../../firebase__config'
 import { initializeFirestore, doc, setDoc } from "firebase/firestore"; //db
 import { initializeApp } from "firebase/app";
+import { subAccount__create } from "../Gemini";
 
 // IPN 5lDiNNH82gEbto+6950NZpob5BaV3uhI
 
@@ -51,7 +52,6 @@ export default (props) => {
 
                 const addPayment = async () => { //create plan
                         await setDoc(doc(db, "payments", response['data']['payment_id']), {
-                            name: response['data']['payment_id'],
                             balance: 10000, 
                             status: 'waiting',
                             uid: props.user__.uid
@@ -64,6 +64,7 @@ export default (props) => {
                         })
                     }
                     addPayment()
+                    
                 })
                 .catch(error => {
                     console.log(error);

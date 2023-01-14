@@ -4,6 +4,11 @@ const app = express();
 import firestore from 'firebase-admin';
 import axios from 'axios'
 
+import cors from 'cors'
+import WebSocket from 'ws'
+
+
+
 firestore.initializeApp({
     credential: firestore.credential.cert({
         "type": "service_account",
@@ -22,11 +27,41 @@ firestore.initializeApp({
 const db = firestore.firestore(); 
 const payments__ = db.collection('payments');
 
+
+
+
+
+let price = 0
+let ws = new WebSocket('wss://stream.binance.com:9443/ws/btcusdt@ticker');
+ws.on('open', function open() {
+    console.log('Conexión establecida con éxito');
+});
+ws.on('message', function incoming(data) {
+    price = JSON.parse(data).c
+});
+
+
+
+
+app.use(cors())
+
 app.get('/', (req, res) => {
     res.send('Hello world Express');
 })
 
+app.get('/test', (req, res) => {
+    res.json([
+        {"data":price}
+    ]);
+});
+
+
+
+
 app.listen(3000, () => {
+
+    console.log('listening')
+
     const interval = setInterval(async() => {
         
         const snapshot = await payments__.get();
@@ -38,18 +73,19 @@ app.listen(3000, () => {
                 }
             }).then(response => {
                 if (response['data']['payment_status'] == 'finished'){
-                    console.log('uno llega acá')
+
                     const id = Math.random().toString(36)
 
                     const item__ref = db.collection('plans').doc(id);
                     const add = async() => {
                         await item__ref.set({
                             'account__balance': document.data()['balance'], 
+                            'password': Math.random().toString(36),
                             'uid': document.data()['uid'] 
                         });
                     }
                     add()
-    
+
                     const remove = async() => {
                         await db.collection('payments').doc(document.id).delete();
                     }
@@ -61,13 +97,6 @@ app.listen(3000, () => {
         });
     }, 3000);
     interval
+
 })
 
-const collectionRef = db.collection('users');
-const documentRef = collectionRef.doc();
-
-// Establecer los datos
-documentRef.set({
-  name: 'John Doe',
-  age: 25
-});

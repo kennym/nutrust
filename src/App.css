@@ -1,7 +1,16 @@
+:root{
+    color-scheme: dark;
+}
 body{
-    background-color: #161616;
-    font-family: Space Grotesk;
+    background-color: #0E0E0E;
+    font-family: DM Sans;
+    position: relative;
+    min-height: 100vh;
 }
 .brand{
-    filter: invert(77%) sepia(72%) saturate(316%) hue-rotate(34deg) brightness(108%) contrast(102%);
+    filter: invert(79%) sepia(67%) saturate(227%) hue-rotate(27deg) brightness(105%) contrast(108%);
+}
+.branch{
+    background: rgb(14,14,14);
+    background: linear-gradient(0deg, rgba(14,14,14,1) 0%, rgba(114,114,114,1) 17%, rgba(114,114,114,1) 83%, rgba(14,14,14,1) 100%);
 }

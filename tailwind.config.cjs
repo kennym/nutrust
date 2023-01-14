@@ -11,8 +11,9 @@ module.exports = {
         'gray-600': '#1B1B1B',
         'violet-500': '#CD70FF',
         'violet-600': '#C455FF',
-        'green-500': '#CFF891',
+        'green-500': '#EAFF96',
         'red-500': '#FE8D8D',
+        'pro-100': '#727272'
       },
       spacing: {
         '2': '7px',
