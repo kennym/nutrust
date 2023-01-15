@@ -4,11 +4,10 @@ import axios from 'axios';
 import firebaseConfig from '../../firebase__config'
 import { initializeFirestore, doc, setDoc } from "firebase/firestore"; //db
 import { initializeApp } from "firebase/app";
-import { subAccount__create } from "../Gemini";
 
 // IPN 5lDiNNH82gEbto+6950NZpob5BaV3uhI
 
-export default (props) => {
+export default (props:any) => {
 
     const [pay, setPay] = useState('')
     const [amount, setAmount] = useState('')

@@ -8,20 +8,25 @@ import { getAuth, signOut } from "firebase/auth";
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
-import Login from './components/pages/Login';
-import Register from './components/pages/Register';
-import Home from './components/pages/Home';
+//Home
+import Login from './components/pages/home/Login';
+import Signup from './components/pages/home/Signup';
+import Home from './components/pages/home/Home';
+import Challenges from './components/pages/home/Challenges';
+
+//Interface
+import Dashboard from './components/pages/interface/Dashboard';
+import Products from './components/pages/home/Products';
 import Pay from './components/pages/Pay';
 import Account from './components/pages/Account';
-import Platform from './components/pages/Platform';
-import Products from './components/pages/Products';
-import Challenges from './components/pages/Challenges';
+import Gateway from './components/pages/interface/Gateway';
+import Trade from './components/pages/interface/Trade';
 
 function App() {
 
   const firebase = useFirebaseApp();
 
-  const [user__, setUser__] = useState('') //for logout
+  const [user__, setUser__] = useState({}) //for logout
   const [uid, setUid] = useState('')
   const auth = getAuth();
 
@@ -34,7 +39,8 @@ function App() {
 
   const logout = async() => {
     signOut(auth).then(() => {
-        setUser__('')
+        setUser__({})
+        console.log('Desloguea3')
     }).catch((error) => {
         console.log('error papu')
     })
@@ -45,15 +51,20 @@ function App() {
       <Navbar user__={user__} auth={auth} logout={logout}/>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />}/>
-        <Route path="/register" element={<Register />}/>
+
+        <Route path="/login" element={<Login user__={user__}/>}/>
+        <Route path="/signup" element={<Signup user__={user__} />}/>
+
         <Route path="/pay" element={<Pay user__={user__} />}/>
         <Route path="/account" element={<Account user__={user__} />}/>
-        <Route path="/platform" element={<Platform user__={user__} />}/>
+        <Route path="/dashboard" element={<Dashboard user__={user__} />}/>
         <Route path="/products" element={<Products user__={user__} />}/>
-        <Route path="/challenges" element={<Challenges user__={user__} />}/>
+        <Route path="/challenges" element={<Challenges />}/>
+
+        <Route path="/gateway" element={<Gateway user__={user__} />}/>
+        <Route path="/trade" element={<Trade user__={user__} />}/>
       </Routes>
-      <Footer/>
+      {window.location.pathname !== '/trade' && <Footer/>}
     </div>
   )
 }

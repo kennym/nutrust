@@ -4,7 +4,7 @@ import firebaseConfig from '../../firebase__config'
 import { initializeFirestore, getDocs, collection } from "firebase/firestore"; //db
 import { initializeApp } from "firebase/app";
 
-export default (props) => {
+export default (props:any) => {
 
     const [plans, setPlans] = useState([])
 
@@ -18,7 +18,7 @@ export default (props) => {
         const getPlans = async() => {
             await getDocs(collection(db, 'plans'))
             .then((QuerySnapshot) => {
-                let aux__ = []
+                let aux__:any = []
                 QuerySnapshot.forEach((i) => {
                     const plan = i.data()
                     if (plan.uid == props.user__.uid){
@@ -35,7 +35,7 @@ export default (props) => {
         <div className="w-96 mt-4 border rounded-xl p-4 flex flex-col bg-white text-black">
             <p className="text-2xl">Tus planes:</p>
             {
-                plans.map((plan, key) => {
+                plans.map((plan:any, key) => {
                     return (
                         <div key={key} className="border border-black p-4 rounded-sm">
                             <h1>Plan X</h1>
